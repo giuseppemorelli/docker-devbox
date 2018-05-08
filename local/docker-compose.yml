@@ -30,6 +30,10 @@ services:
       APACHE_USER_UID: ${NEW_UID}
       APACHE_USER_GID: ${NEW_GID}
 
+      POSTFIX_myhostname: ${PROJECT_HOSTNAME}
+      POSTFIX_mydestination: ${PROJECT_HOSTNAME}
+      POSTFIX_relayhost: mailhog-server:${MAILHOG_SERVICE_PORT}
+
     ports:
       # ---- Format: ----
       # [HOST-ADDR : ] HOST-PORT : DOCKER-PORT
@@ -50,7 +54,6 @@ services:
       - redis:redis-server
       - mysql:mysql-server
       - mailhog:mailhog-server
-
 
   # ------------------------------------------------------------
   # MySQL Database
@@ -138,9 +141,8 @@ services:
     working_dir: /data
     entrypoint: ['grunt']
     links:
-        - redis:redis-server
-        - mysql:mysql-server
-
+      - redis:redis-server
+      - mysql:mysql-server
 
 ################################################################################
 # NETWORK
