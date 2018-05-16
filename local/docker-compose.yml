@@ -32,28 +32,31 @@ services:
 
       POSTFIX_myhostname: ${PROJECT_HOSTNAME}
       POSTFIX_mydestination: ${PROJECT_HOSTNAME}
-      POSTFIX_relayhost: mailhog-server:${MAILHOG_SERVICE_PORT}
-
-    ports:
-      # ---- Format: ----
-      # [HOST-ADDR : ] HOST-PORT : DOCKER-PORT
-      - "${LOCAL_LISTEN_ADDR}${WEB_SERVER_PORT}:80"
-      - "${LOCAL_LISTEN_ADDR}${WEB_SERVER_PORT_SSL}:443"
+      POSTFIX_relayhost: mailhog-server:1025
 
     volumes:
       # ---- Format: ----
       # HOST-DIRECTORY : DOCKER-DIRECTORY
 
-      # Mount web folder
+      # mount web folder
       - ${HOST_PATH_WEB_WWW}:/var/www/html/
 
       # Website config
       - ${DEVBOX_PATH}/config/${WEB_SERVER_NAME}/sites-enabled/:/etc/apache2/sites-enabled/
 
+      # composer config
+      - ${DEVBOX_PATH}/config/composer/:/var/www/.composer/
+
+    working_dir: /var/www/
+
     links:
       - redis:redis-server
       - mysql:mysql-server
       - mailhog:mailhog-server
+
+    networks:
+      app_net:
+        ipv4_address: ${IP_WEB_SERVER}
 
   # ------------------------------------------------------------
   # MySQL Database
@@ -63,19 +66,18 @@ services:
     image: ${MYSQL_SERVER}
 
     environment:
-      ##
-      ## Adjust Root password
-      ##
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-
-    ports:
-      # [local-machine:]local-port:docker-port
-      - "${LOCAL_LISTEN_ADDR}${MYSQL_SERVER_PORT}:3306"
+      MYSQL_ROOT_PASSWORD: "docker"
+      MYSQL_USER: "local"
+      MYSQL_PASSWORD: "local"
 
     volumes:
       # ---- Format: ----
       # HOST-DIRECTORY : DOCKER-DIRECTORY
       - ${MYSQL_BACKUP_FOLDER}:/backup/
+
+    networks:
+      app_net:
+        ipv4_address: ${IP_MYSQL_SERVER}
 
   # ------------------------------------------------------------
   # Redis
@@ -84,9 +86,9 @@ services:
     container_name: ${PROJECT_NAME}_${REDIS_SERVER_NAME}
     image: ${REDIS_SERVER}
 
-    ports:
-      # [local-machine:]local-port:docker-port
-      - "${LOCAL_LISTEN_ADDR}${REDIS_SERVER_PORT}:6379"
+    networks:
+      app_net:
+        ipv4_address: ${IP_REDIS_SERVER}
 
   # ------------------------------------------------------------
   # phpmyadmin
@@ -94,13 +96,18 @@ services:
   phpmyadmin:
     container_name: ${PROJECT_NAME}_${PHPMYADMIN_SERVICE_NAME}
     image: ${PHPMYADMIN_SERVICE}
+
     environment:
       PMA_HOST: mysql-server
+      PMA_USER: "root"
+      PMA_PASSWORD: "docker"
+
     links:
       - mysql:mysql-server
-    ports:
-      # [local-machine:]local-port:docker-port
-      - "${LOCAL_LISTEN_ADDR}${PHPMYADMIN_SERVICE_PORT}:80"
+
+    networks:
+      app_net:
+        ipv4_address: ${IP_PHPMYADMIN_SERVICE}
 
   # ------------------------------------------------------------
   # mailhog
@@ -108,10 +115,10 @@ services:
   mailhog:
     container_name: ${PROJECT_NAME}_${MAILHOG_SERVICE_NAME}
     image: ${MAILHOG_SERVICE}
-    ports:
-      # [local-machine:]local-port:docker-port
-      - "${LOCAL_LISTEN_ADDR}${MAILHOG_SERVICE_PORT}:1025"
-      - "${LOCAL_LISTEN_ADDR}${MAILHOG_SERVICE_PORT_WEB}:8025"
+
+    networks:
+      app_net:
+        ipv4_address: ${IP_MAILHOG_SERVICE}
 
   # ------------------------------------------------------------
   # npm
@@ -127,6 +134,10 @@ services:
     working_dir: /data
     entrypoint: ['npm', '--no-bin-link']
 
+    networks:
+      app_net:
+        ipv4_address: ${IP_NPM_SERVICE}
+
   # ------------------------------------------------------------
   # grunt
   # ------------------------------------------------------------
@@ -140,20 +151,24 @@ services:
       - ${HOST_PATH_GRUNT_DATADIR}:/data/
     working_dir: /data
     entrypoint: ['grunt']
+
     links:
       - redis:redis-server
       - mysql:mysql-server
 
+    networks:
+      app_net:
+        ipv4_address: ${IP_GRUNT_SERVICE}
+
 ################################################################################
 # NETWORK
 ################################################################################
-#networks:
-#  app_net:
-#    driver: bridge
-#    driver_opts:
-#      com.docker.network.enable_ipv6: "false"
-#    ipam:
-#      driver: default
-#      config:
-#        - subnet: 172.16.238.0/24
-#          gateway: 172.16.238.1
+networks:
+  app_net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      driver: default
+      config:
+        - subnet: ${IP_SUBNET}
