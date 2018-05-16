@@ -77,6 +77,8 @@ services:
       # HOST-DIRECTORY : DOCKER-DIRECTORY
       - ${MYSQL_BACKUP_FOLDER}:/backup/
 
+      - ${DEVBOX_PATH}:/devbox
+
     networks:
       app_net:
         ipv4_address: ${IP_MYSQL_SERVER}
