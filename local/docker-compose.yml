@@ -19,7 +19,7 @@ services:
   # Web Server
   # ------------------------------------------------------------
   web:
-    container_name: ${PROJECT_NAME}_${WEB_SERVER_NAME}
+    container_name: ${COMPOSE_PROJECT_NAME}_${WEB_SERVER_NAME}
     image: ${WEB_SERVER}
 
     environment:
@@ -47,6 +47,9 @@ services:
       # composer config
       - ${DEVBOX_PATH}/config/composer/:/var/www/.composer/
 
+      # ssh config
+      - ${DEVBOX_PATH}/config/ssh/:/var/www/.ssh/
+
     working_dir: /var/www/
 
     links:
@@ -62,7 +65,7 @@ services:
   # MySQL Database
   # ------------------------------------------------------------
   mysql:
-    container_name: ${PROJECT_NAME}_${MYSQL_SERVER_NAME}
+    container_name: ${COMPOSE_PROJECT_NAME}_${MYSQL_SERVER_NAME}
     image: ${MYSQL_SERVER}
 
     environment:
@@ -83,7 +86,7 @@ services:
   # Redis
   # ------------------------------------------------------------
   redis:
-    container_name: ${PROJECT_NAME}_${REDIS_SERVER_NAME}
+    container_name: ${COMPOSE_PROJECT_NAME}_${REDIS_SERVER_NAME}
     image: ${REDIS_SERVER}
 
     networks:
@@ -94,7 +97,7 @@ services:
   # phpmyadmin
   # ------------------------------------------------------------
   phpmyadmin:
-    container_name: ${PROJECT_NAME}_${PHPMYADMIN_SERVICE_NAME}
+    container_name: ${COMPOSE_PROJECT_NAME}_${PHPMYADMIN_SERVICE_NAME}
     image: ${PHPMYADMIN_SERVICE}
 
     environment:
@@ -113,7 +116,7 @@ services:
   # mailhog
   # ------------------------------------------------------------
   mailhog:
-    container_name: ${PROJECT_NAME}_${MAILHOG_SERVICE_NAME}
+    container_name: ${COMPOSE_PROJECT_NAME}_${MAILHOG_SERVICE_NAME}
     image: ${MAILHOG_SERVICE}
 
     networks:
@@ -124,7 +127,7 @@ services:
   # npm
   # ------------------------------------------------------------
   npm:
-    container_name: ${PROJECT_NAME}_${NODE_SERVICE_NAME}
+    container_name: ${COMPOSE_PROJECT_NAME}_${NODE_SERVICE_NAME}
     image: ${NODE_SERVICE}
 
     volumes:
@@ -142,7 +145,7 @@ services:
   # grunt
   # ------------------------------------------------------------
   grunt:
-    container_name: ${PROJECT_NAME}_${GRUNT_SERVICE_NAME}
+    container_name: ${COMPOSE_PROJECT_NAME}_${GRUNT_SERVICE_NAME}
     image: ${GRUNT_SERVICE}
 
     volumes:
