@@ -56,6 +56,10 @@ services:
       app_net:
         ipv4_address: ${IP_WEB_SERVER}
 
+    extra_hosts:
+      - ${MYSQL_SERVER_NAME}-server:${IP_MYSQL_SERVER}
+      - ${REDIS_SERVER_NAME}-server:${IP_REDIS_SERVER}
+
   # ------------------------------------------------------------
   # MySQL Database
   # ------------------------------------------------------------
