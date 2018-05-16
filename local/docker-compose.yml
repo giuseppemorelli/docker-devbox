@@ -32,7 +32,7 @@ services:
 
       POSTFIX_myhostname: ${PROJECT_HOSTNAME}
       POSTFIX_mydestination: ${PROJECT_HOSTNAME}
-      POSTFIX_relayhost: mailhog-server:1025
+      POSTFIX_relayhost: ${IP_MAILHOG_SERVICE}:1025
 
     volumes:
       # ---- Format: ----
@@ -51,11 +51,6 @@ services:
       - ${DEVBOX_PATH}/config/ssh/:/var/www/.ssh/
 
     working_dir: /var/www/
-
-    links:
-      - redis:redis-server
-      - mysql:mysql-server
-      - mailhog:mailhog-server
 
     networks:
       app_net:
@@ -101,12 +96,9 @@ services:
     image: ${PHPMYADMIN_SERVICE}
 
     environment:
-      PMA_HOST: mysql-server
+      PMA_HOST: ${IP_MYSQL_SERVER}
       PMA_USER: "root"
       PMA_PASSWORD: "docker"
-
-    links:
-      - mysql:mysql-server
 
     networks:
       app_net:
@@ -155,13 +147,28 @@ services:
     working_dir: /data
     entrypoint: ['grunt']
 
-    links:
-      - redis:redis-server
-      - mysql:mysql-server
-
     networks:
       app_net:
         ipv4_address: ${IP_GRUNT_SERVICE}
+
+  # ------------------------------------------------------------
+  # n98-magerun
+  # ------------------------------------------------------------
+  n98_magerun:
+    container_name: ${COMPOSE_PROJECT_NAME}_${N98_MAGERUN_SERVICE_NAME}
+    image: ${N98_MAGERUN_SERVICE}
+
+    environment:
+      MAGE_ROOT_DIR: ${HOST_PATH_WEB_WWW}
+
+    volumes:
+      # ---- Format: ----
+      # HOST-DIRECTORY : DOCKER-DIRECTORY
+      - ${HOST_PATH_WEB_WWW}:/var/www/html
+
+    networks:
+      app_net:
+        ipv4_address: ${IP_N98_MAGERUN_SERVICE}
 
 ################################################################################
 # NETWORK
