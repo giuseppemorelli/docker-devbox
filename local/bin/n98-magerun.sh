@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker-compose run n98_magerun $1
+docker-compose run --rm -u $UID n98_magerun $1
