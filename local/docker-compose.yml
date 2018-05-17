@@ -50,6 +50,9 @@ services:
       # ssh config
       - ${DEVBOX_PATH}/config/ssh/:/var/www/.ssh/
 
+      # extra volume
+      - ${HOST_PATH_WEB_EXTRA_STORAGE}:/mnt/
+
     working_dir: /var/www/
 
     networks:
