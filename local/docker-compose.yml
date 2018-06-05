@@ -62,6 +62,7 @@ services:
     extra_hosts:
       - ${MYSQL_SERVER_NAME}-server:${IP_MYSQL_SERVER}
       - ${REDIS_SERVER_NAME}-server:${IP_REDIS_SERVER}
+      - ${MAILHOG_SERVICE_NAME}-server:${IP_MAILHOG_SERVICE}
 
   # ------------------------------------------------------------
   # MySQL Database
