@@ -1,3 +1,5 @@
 .env
 config/composer/*
 !config/composer/.gitkeep
+config/ssh/*
+!config/ssh/.gitkeep
