@@ -34,6 +34,8 @@ services:
       POSTFIX_mydestination: ${PROJECT_HOSTNAME}
       POSTFIX_relayhost: ${IP_MAILHOG_SERVICE}:1025
 
+      XDEBUG_CONFIG: remote_host=${IP_LOCAL_COMPUTER}
+
     volumes:
       # ---- Format: ----
       # HOST-DIRECTORY : DOCKER-DIRECTORY
