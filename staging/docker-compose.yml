@@ -1,0 +1,162 @@
+version: '3'
+
+
+################################################################################
+# SERVICES
+################################################################################
+services:
+
+  # ------------------------------------------------------------
+  # Web Server
+  # ------------------------------------------------------------
+  web:
+    container_name: ${COMPOSE_PROJECT_NAME}_${WEB_SERVER_NAME}
+    image: ${WEB_SERVER}
+
+    ports:
+      - 80:80
+      - 443:443
+
+    restart: on-failure
+
+    environment:
+
+      ##
+      ## UserID and GroupID
+      ##
+      APACHE_USER_UID: ${NEW_UID}
+      APACHE_USER_GID: ${NEW_GID}
+
+      POSTFIX_myhostname: ${PROJECT_HOSTNAME}
+      POSTFIX_mydestination: ${PROJECT_HOSTNAME}
+      POSTFIX_relayhost: ${IP_MAILHOG_SERVICE}:1025
+
+    volumes:
+      # ---- Format: ----
+      # HOST-DIRECTORY : DOCKER-DIRECTORY
+
+      # mount web folder
+      - ${HOST_PATH_WEB_WWW}:/var/www/html/
+
+      # Website config
+      - ${DEVBOX_PATH}/config/${WEB_SERVER_NAME}/sites-enabled/:/etc/apache2/sites-enabled/
+
+      # composer config
+      - ${DEVBOX_PATH}/config/composer/:/var/www/.composer/
+
+      # ssh config
+      - ${DEVBOX_PATH}/config/ssh/:/var/www/.ssh/
+
+      # extra volume
+      - ${HOST_PATH_WEB_EXTRA_STORAGE}:/mnt/
+
+    working_dir: /var/www/
+
+    networks:
+      app_net:
+        ipv4_address: ${IP_WEB_SERVER}
+
+    extra_hosts:
+#      - ${MYSQL_SERVER_NAME}-server:${IP_MYSQL_SERVER}
+      - ${REDIS_SERVER_NAME}-server:${IP_REDIS_SERVER}
+      - ${MAILHOG_SERVICE_NAME}-server:${IP_MAILHOG_SERVICE}
+
+  # ------------------------------------------------------------
+  # MySQL Database
+  # ------------------------------------------------------------
+#  mysql:
+#    container_name: ${COMPOSE_PROJECT_NAME}_${MYSQL_SERVER_NAME}
+#    image: ${MYSQL_SERVER}
+#
+#    environment:
+#      MYSQL_ROOT_PASSWORD: "docker"
+#      MYSQL_USER: "local"
+#      MYSQL_PASSWORD: "local"
+#
+#    volumes:
+#      # ---- Format: ----
+#      # HOST-DIRECTORY : DOCKER-DIRECTORY
+#      - ${MYSQL_BACKUP_FOLDER}:/backup/
+#
+#      - ${DEVBOX_PATH}:/devbox
+#
+#    networks:
+#      app_net:
+#        ipv4_address: ${IP_MYSQL_SERVER}
+
+  # ------------------------------------------------------------
+  # Redis
+  # ------------------------------------------------------------
+  redis:
+    container_name: ${COMPOSE_PROJECT_NAME}_${REDIS_SERVER_NAME}
+    image: ${REDIS_SERVER}
+
+    networks:
+      app_net:
+        ipv4_address: ${IP_REDIS_SERVER}
+
+  # ------------------------------------------------------------
+  # phpmyadmin
+  # ------------------------------------------------------------
+  phpmyadmin:
+    container_name: ${COMPOSE_PROJECT_NAME}_${PHPMYADMIN_SERVICE_NAME}
+    image: ${PHPMYADMIN_SERVICE}
+
+    ports:
+      - 5050:80
+
+    environment:
+      PMA_HOST: ${IP_MYSQL_SERVER}
+
+    networks:
+      app_net:
+        ipv4_address: ${IP_PHPMYADMIN_SERVICE}
+
+  # ------------------------------------------------------------
+  # mailhog
+  # ------------------------------------------------------------
+  mailhog:
+    container_name: ${COMPOSE_PROJECT_NAME}_${MAILHOG_SERVICE_NAME}
+    image: ${MAILHOG_SERVICE}
+
+    networks:
+      app_net:
+        ipv4_address: ${IP_MAILHOG_SERVICE}
+
+  # ------------------------------------------------------------
+  # n98-magerun
+  # ------------------------------------------------------------
+  n98_magerun:
+    container_name: ${COMPOSE_PROJECT_NAME}_${N98_MAGERUN_SERVICE_NAME}
+    image: ${N98_MAGERUN_SERVICE}
+
+    environment:
+      MAGE_ROOT_DIR: ${HOST_PATH_N98_MAGERUN_DATADIR}
+
+    volumes:
+      # ---- Format: ----
+      # HOST-DIRECTORY : DOCKER-DIRECTORY
+      - ${HOST_PATH_WEB_WWW}:/var/www/html
+
+    working_dir: /var/www/html
+
+    networks:
+      app_net:
+        ipv4_address: ${IP_N98_MAGERUN_SERVICE}
+
+    extra_hosts:
+#      - ${MYSQL_SERVER_NAME}-server:${IP_MYSQL_SERVER}
+      - ${REDIS_SERVER_NAME}-server:${IP_REDIS_SERVER}
+
+################################################################################
+# NETWORK
+################################################################################
+networks:
+  app_net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      driver: default
+      config:
+        - subnet: ${IP_SUBNET}
