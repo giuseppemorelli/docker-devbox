@@ -162,31 +162,6 @@ services:
       app_net:
         ipv4_address: ${IP_GRUNT_SERVICE}
 
-  # ------------------------------------------------------------
-  # n98-magerun
-  # ------------------------------------------------------------
-  n98_magerun:
-    container_name: ${COMPOSE_PROJECT_NAME}_${N98_MAGERUN_SERVICE_NAME}
-    image: ${N98_MAGERUN_SERVICE}
-
-    environment:
-      MAGE_ROOT_DIR: ${HOST_PATH_N98_MAGERUN_DATADIR}
-
-    volumes:
-      # ---- Format: ----
-      # HOST-DIRECTORY : DOCKER-DIRECTORY
-      - ${HOST_PATH_WEB_WWW}:/var/www/html
-
-    working_dir: /var/www/html
-
-    networks:
-      app_net:
-        ipv4_address: ${IP_N98_MAGERUN_SERVICE}
-
-    extra_hosts:
-      - ${MYSQL_SERVER_NAME}-server:${IP_MYSQL_SERVER}
-      - ${REDIS_SERVER_NAME}-server:${IP_REDIS_SERVER}
-
 ################################################################################
 # NETWORK
 ################################################################################
