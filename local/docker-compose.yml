@@ -39,7 +39,8 @@ services:
       # HOST-DIRECTORY : DOCKER-DIRECTORY
 
       # mount web folder
-      - ${HOST_PATH_WEB_WWW}:/var/www/html/
+      - ${HOST_PATH_WEB_WWW}:/var/www/html/project
+      - ${DEVBOX_PATH}/../:/var/www/html/docker
 
       # Website config
       - ${DEVBOX_PATH}/config/${WEB_SERVER_NAME}/sites-enabled/:/etc/apache2/sites-enabled/
@@ -53,7 +54,7 @@ services:
       # extra volume
       - ${HOST_PATH_WEB_EXTRA_STORAGE}:/mnt/
 
-    working_dir: /var/www/
+    working_dir: /var/www/html
 
     networks:
       app_net:
