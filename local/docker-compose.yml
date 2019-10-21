@@ -33,6 +33,8 @@ services:
       POSTFIX_relayhost: ${IP_MAILHOG_SERVICE}:1025
 
       XDEBUG_CONFIG: remote_host=${IP_LOCAL_COMPUTER}
+      WEBSERVER_LOG_DIR: /var/www/html/docker/local/tmp/logs
+      PHP_LOG_DIR: /var/www/html/docker/local/tmp/logs
 
     volumes:
       # ---- Format: ----
@@ -125,43 +127,6 @@ services:
     networks:
       app_net:
         ipv4_address: ${IP_MAILHOG_SERVICE}
-
-  # ------------------------------------------------------------
-  # npm
-  # ------------------------------------------------------------
-  npm:
-    container_name: ${COMPOSE_PROJECT_NAME}_${NODE_SERVICE_NAME}
-    image: ${NODE_SERVICE}
-
-    volumes:
-      # ---- Format: ----
-      # HOST-DIRECTORY : DOCKER-DIRECTORY
-      - ${HOST_PATH_NPM_DATADIR}:/data/
-    working_dir: /data
-    entrypoint: ['npm', '--no-bin-link']
-
-    networks:
-      app_net:
-        ipv4_address: ${IP_NPM_SERVICE}
-
-  # ------------------------------------------------------------
-  # grunt
-  # ------------------------------------------------------------
-  grunt:
-    container_name: ${COMPOSE_PROJECT_NAME}_${GRUNT_SERVICE_NAME}
-    image: ${GRUNT_SERVICE}
-
-    volumes:
-      # ---- Format: ----
-      # HOST-DIRECTORY : DOCKER-DIRECTORY
-      - ${HOST_PATH_GRUNT_DATADIR}:/data/
-
-    working_dir: /data
-    entrypoint: ['grunt']
-
-    networks:
-      app_net:
-        ipv4_address: ${IP_GRUNT_SERVICE}
 
 ################################################################################
 # NETWORK
