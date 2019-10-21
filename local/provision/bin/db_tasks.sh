@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+echo "CREATE DATABASE"
+# mysql -u root -pdocker -e "CREATE DATABASE mydatabase"
+echo "SETTING UP local USER"
+mysql -u root -pdocker -e "REVOKE ALL PRIVILEGES ON *.* FROM 'local'@'%'; GRANT ALL PRIVILEGES ON *.* TO 'local'@'%' REQUIRE NONE WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;"
