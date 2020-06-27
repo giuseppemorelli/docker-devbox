@@ -13,131 +13,160 @@ version: '3'
 ################################################################################
 services:
 
-  # ------------------------------------------------------------
-  # Web Server
-  # ------------------------------------------------------------
-  web:
-    container_name: ${COMPOSE_PROJECT_NAME}_${WEB_SERVER_NAME}
-    image: ${WEB_SERVER}
+    # ------------------------------------------------------------
+    # Web Server
+    # ------------------------------------------------------------
+    web:
+        container_name: ${COMPOSE_PROJECT_NAME}_${WEB_SERVER_NAME}
+        image: ${WEB_SERVER}
 
-    environment:
+        environment:
 
-      ##
-      ## UserID and GroupID
-      ##
-      APACHE_USER_UID: ${NEW_UID}
-      APACHE_USER_GID: ${NEW_GID}
+            ##
+            ## UserID and GroupID
+            ##
+            APACHE_USER_UID: ${NEW_UID}
+            APACHE_USER_GID: ${NEW_GID}
 
-      POSTFIX_myhostname: ${PROJECT_HOSTNAME}
-      POSTFIX_mydestination: ${PROJECT_HOSTNAME}
-      POSTFIX_relayhost: ${IP_MAILHOG_SERVICE}:1025
+            POSTFIX_myhostname: ${PROJECT_HOSTNAME}
+            POSTFIX_mydestination: ${PROJECT_HOSTNAME}
+            POSTFIX_relayhost: ${IP_MAILHOG_SERVICE}:1025
 
-      XDEBUG_CONFIG: remote_host=${IP_LOCAL_COMPUTER}
-      WEBSERVER_LOG_DIR: /var/www/html/docker/local/tmp/logs
-      PHP_LOG_DIR: /var/www/html/docker/local/tmp/logs
+            XDEBUG_CONFIG: remote_host=${IP_LOCAL_COMPUTER}
+            WEBSERVER_LOG_DIR: /var/www/html/docker/local/tmp/logs
+            PHP_LOG_DIR: /var/www/html/docker/local/tmp/logs
 
-    volumes:
-      # ---- Format: ----
-      # HOST-DIRECTORY : DOCKER-DIRECTORY
+        volumes:
+            # ---- Format: ----
+            # HOST-DIRECTORY : DOCKER-DIRECTORY
 
-      # mount web folder
-      - ${HOST_PATH_WEB_WWW}:/var/www/html/project
-      - ${DEVBOX_PATH}/../:/var/www/html/docker
+            # mount web folder
+            - ${HOST_PATH_WEB_WWW}:/var/www/html/project
+            - ${DEVBOX_PATH}/../:/var/www/html/docker
 
-      # Website config
-      - ${DEVBOX_PATH}/config/${WEB_SERVER_NAME}/sites-enabled/:/etc/apache2/sites-enabled/
+            # Website config
+            - ${DEVBOX_PATH}/config/${WEB_SERVER_NAME}/sites-enabled/:/etc/apache2/sites-enabled/
 
-      # composer config
-      - ${DEVBOX_PATH}/config/composer/:/var/www/.composer/
-      - ${HOST_PATH_COMPOSER_CACHE}:/var/www/.composer/cache/
+            # composer config
+            - ${DEVBOX_PATH}/config/composer/:/var/www/.composer/
+            - ${HOST_PATH_COMPOSER_CACHE}:/var/www/.composer/cache/
 
-      # ssh config
-      - ${DEVBOX_PATH}/config/ssh/:/var/www/.ssh/
+            # ssh config
+            - ${DEVBOX_PATH}/config/ssh/:/var/www/.ssh/
 
-      # extra volume
-      - ${HOST_PATH_WEB_EXTRA_STORAGE}:/mnt/
+            # extra volume
+            - ${HOST_PATH_WEB_EXTRA_STORAGE}:/mnt/
 
-    working_dir: /var/www/html
+            # home user folder
+            - ~/:/home/user
 
-    networks:
-      app_net:
-        ipv4_address: ${IP_WEB_SERVER}
+        working_dir: /var/www/html
 
-    extra_hosts:
-      - ${MYSQL_SERVER_NAME}-server:${IP_MYSQL_SERVER}
-      - ${REDIS_SERVER_NAME}-server:${IP_REDIS_SERVER}
-      - ${MAILHOG_SERVICE_NAME}-server:${IP_MAILHOG_SERVICE}
+        networks:
+            app_net:
+                ipv4_address: ${IP_WEB_SERVER}
 
-  # ------------------------------------------------------------
-  # MySQL Database
-  # ------------------------------------------------------------
-  mysql:
-    container_name: ${COMPOSE_PROJECT_NAME}_${MYSQL_SERVER_NAME}
-    image: ${MYSQL_SERVER}
+        extra_hosts:
+            - ${MYSQL_SERVER_NAME}-server:${IP_MYSQL_SERVER}
+            - ${REDIS_SERVER_NAME}-server:${IP_REDIS_SERVER}
+            - ${MAILHOG_SERVICE_NAME}-server:${IP_MAILHOG_SERVICE}
 
-    environment:
-      MYSQL_ROOT_PASSWORD: "docker"
-      MYSQL_USER: "local"
-      MYSQL_PASSWORD: "local"
+    # ------------------------------------------------------------
+    # MySQL Database
+    # ------------------------------------------------------------
+    mysql:
+        container_name: ${COMPOSE_PROJECT_NAME}_${MYSQL_SERVER_NAME}
+        image: ${MYSQL_SERVER}
 
-    volumes:
-      # ---- Format: ----
-      # HOST-DIRECTORY : DOCKER-DIRECTORY
-      - ${MYSQL_BACKUP_FOLDER}:/backup/
+        environment:
+            MYSQL_ROOT_PASSWORD: "docker"
+            MYSQL_USER: "local"
+            MYSQL_PASSWORD: "local"
 
-      - ${DEVBOX_PATH}:/devbox
+        volumes:
+            # ---- Format: ----
+            # HOST-DIRECTORY : DOCKER-DIRECTORY
+            - ${MYSQL_BACKUP_FOLDER}:/backup/
 
-    networks:
-      app_net:
-        ipv4_address: ${IP_MYSQL_SERVER}
+            - ${DEVBOX_PATH}:/devbox
 
-  # ------------------------------------------------------------
-  # Redis
-  # ------------------------------------------------------------
-  redis:
-    container_name: ${COMPOSE_PROJECT_NAME}_${REDIS_SERVER_NAME}
-    image: ${REDIS_SERVER}
+        networks:
+            app_net:
+                ipv4_address: ${IP_MYSQL_SERVER}
 
-    networks:
-      app_net:
-        ipv4_address: ${IP_REDIS_SERVER}
+    # ------------------------------------------------------------
+    # Redis
+    # ------------------------------------------------------------
+    redis:
+        container_name: ${COMPOSE_PROJECT_NAME}_${REDIS_SERVER_NAME}
+        image: ${REDIS_SERVER}
 
-  # ------------------------------------------------------------
-  # phpmyadmin
-  # ------------------------------------------------------------
-  phpmyadmin:
-    container_name: ${COMPOSE_PROJECT_NAME}_${PHPMYADMIN_SERVICE_NAME}
-    image: ${PHPMYADMIN_SERVICE}
+        networks:
+            app_net:
+                ipv4_address: ${IP_REDIS_SERVER}
 
-    environment:
-      PMA_HOST: ${IP_MYSQL_SERVER}
-      PMA_USER: "root"
-      PMA_PASSWORD: "docker"
+    # ------------------------------------------------------------
+    # phpmyadmin
+    # ------------------------------------------------------------
+    phpmyadmin:
+        container_name: ${COMPOSE_PROJECT_NAME}_${PHPMYADMIN_SERVICE_NAME}
+        image: ${PHPMYADMIN_SERVICE}
 
-    networks:
-      app_net:
-        ipv4_address: ${IP_PHPMYADMIN_SERVICE}
+        environment:
+            PMA_HOST: ${IP_MYSQL_SERVER}
+            PMA_USER: "root"
+            PMA_PASSWORD: "docker"
 
-  # ------------------------------------------------------------
-  # mailhog
-  # ------------------------------------------------------------
-  mailhog:
-    container_name: ${COMPOSE_PROJECT_NAME}_${MAILHOG_SERVICE_NAME}
-    image: ${MAILHOG_SERVICE}
+        networks:
+            app_net:
+                ipv4_address: ${IP_PHPMYADMIN_SERVICE}
 
-    networks:
-      app_net:
-        ipv4_address: ${IP_MAILHOG_SERVICE}
+    # ------------------------------------------------------------
+    # mailhog
+    # ------------------------------------------------------------
+    mailhog:
+        container_name: ${COMPOSE_PROJECT_NAME}_${MAILHOG_SERVICE_NAME}
+        image: ${MAILHOG_SERVICE}
+
+        networks:
+            app_net:
+                ipv4_address: ${IP_MAILHOG_SERVICE}
+
+    # ------------------------------------------------------------
+    # elasticsearch
+    # ------------------------------------------------------------
+    elasticsearch:
+        container_name: ${COMPOSE_PROJECT_NAME}_${ELASTICSEARCH_SERVICE_NAME}
+        image: ${ELASTICSEARCH_SERVICE}
+
+        environment:
+            ES_JAVA_OPTS: '-Xms512m -Xmx512m'
+            discovery.type: 'single-node'
+
+        networks:
+            app_net:
+                ipv4_address: ${IP_ELASTICSEARCH_SERVICE}
+
+    # ------------------------------------------------------------
+    # elasticsearch hq (monitoring)
+    # ------------------------------------------------------------
+    elasticsearch-sq:
+        container_name: ${COMPOSE_PROJECT_NAME}_${ELASTICSEARCH_HQ_SERVICE_NAME}
+        image: ${ELASTICSEARCH_HQ_SERVICE}
+
+        networks:
+            app_net:
+                ipv4_address: ${IP_ELASTICSEARCH_HQ_SERVICE}
 
 ################################################################################
 # NETWORK
 ################################################################################
 networks:
-  app_net:
-    driver: bridge
-    driver_opts:
-      com.docker.network.enable_ipv6: "false"
-    ipam:
-      driver: default
-      config:
-        - subnet: ${IP_SUBNET}
+    app_net:
+        driver: bridge
+        driver_opts:
+            com.docker.network.enable_ipv6: "false"
+        ipam:
+            driver: default
+            config:
+                -   subnet: ${IP_SUBNET}
