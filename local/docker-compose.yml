@@ -60,7 +60,7 @@ services:
             # home user folder
             - ~/:/home/user
 
-        working_dir: /var/www/html
+        working_dir: /var/www/html/project
 
         networks:
             app_net:
@@ -70,6 +70,7 @@ services:
             - ${MYSQL_SERVER_NAME}-server:${IP_MYSQL_SERVER}
             - ${REDIS_SERVER_NAME}-server:${IP_REDIS_SERVER}
             - ${MAILHOG_SERVICE_NAME}-server:${IP_MAILHOG_SERVICE}
+            - ${ELASTICSEARCH_SERVICE_NAME}-server:${IP_ELASTICSEARCH_SERVICE}
 
     # ------------------------------------------------------------
     # MySQL Database
