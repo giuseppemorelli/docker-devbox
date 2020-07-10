@@ -90,6 +90,8 @@ services:
             - ${MYSQL_BACKUP_FOLDER}:/backup/
 
             - ${DEVBOX_PATH}:/devbox
+            # extra mysql config
+            - ${DEVBOX_PATH}/config/mysql/conf.d/:/etc/mysql/conf.d/
 
         networks:
             app_net:
