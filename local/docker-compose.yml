@@ -59,6 +59,7 @@ services:
 
             # home user folder
             - ~/:/home/user
+            # - ~/:/home/<user>
 
         working_dir: /var/www/html/project
 
