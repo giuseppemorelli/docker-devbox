@@ -117,7 +117,7 @@ services:
         image: ${REDIS_COMMANDER_SERVER}
 
         environment:
-            - REDIS_HOSTS: ${REDIS_COMMANDER_HOSTS}
+            REDIS_HOSTS: ${REDIS_COMMANDER_HOSTS}
 
         networks:
             app_net:
