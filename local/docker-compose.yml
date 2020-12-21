@@ -86,6 +86,7 @@ services:
 
         environment:
             MYSQL_ROOT_PASSWORD: "docker"
+            # for mysql 8 comment user and password user, need to create via script
             MYSQL_USER: "local"
             MYSQL_PASSWORD: "local"
 
@@ -96,7 +97,7 @@ services:
 
             - ${DEVBOX_PATH}:/devbox
             # extra mysql config (seems not working correctly with some versions)
-            # - ${DEVBOX_PATH}/config/mysql/conf.d/:/etc/mysql/conf.d/
+            # - ${DEVBOX_PATH}/config/mysql/conf.d/override_auth.conf:/etc/mysql/conf.d/override_auth.conf
 
         networks:
             app_net:
