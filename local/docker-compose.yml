@@ -35,7 +35,7 @@ services:
             # XDEBUG_CONFIG: remote_host=${IP_LOCAL_COMPUTER}
 
             # v3
-            XDEBUG_CONFIG: client_host=${IP_LOCAL_COMPUTER}
+            XDEBUG_CONFIG: "client_host=${IP_LOCAL_COMPUTER} ${XDEBUG_CONFIG}"
             XDEBUG_SESSION: "${XDEBUG_SESSION}"
             XDEBUG_MODE: "${XDEBUG_MODE}"
 
