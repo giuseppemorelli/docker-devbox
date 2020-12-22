@@ -21,7 +21,6 @@ services:
         image: ${WEB_SERVER}
 
         environment:
-
             ##
             ## UserID and GroupID
             ##
@@ -32,11 +31,14 @@ services:
             POSTFIX_mydestination: ${PROJECT_HOSTNAME}
             POSTFIX_relayhost: ${IP_MAILHOG_SERVICE}:1025
 
-            # v2 XDEBUG_CONFIG: remote_host=${IP_LOCAL_COMPUTER}
+            # v2
+            # XDEBUG_CONFIG: remote_host=${IP_LOCAL_COMPUTER}
+
+            # v3
             XDEBUG_CONFIG: client_host=${IP_LOCAL_COMPUTER}
-            XDEBUG_SESSION: DOCKERGM
-            # uncomment to change xdebug mode
-            # XDEBUG_MODE: develop,debug,trace
+            XDEBUG_SESSION: "${XDEBUG_SESSION}"
+            XDEBUG_MODE: "${XDEBUG_MODE}"
+
             WEBSERVER_LOG_DIR: /var/www/html/docker/local/tmp/logs
             PHP_LOG_DIR: /var/www/html/docker/local/tmp/logs
 
