@@ -186,6 +186,21 @@ services:
             app_net:
                 ipv4_address: ${IP_ELASTICSEARCH_HQ_SERVICE}
 
+    # ------------------------------------------------------------
+    # ngrok
+    # ------------------------------------------------------------
+    ngrok-service:
+        container_name: ${COMPOSE_PROJECT_NAME}_${NGROK_SERVICE_NAME}
+        image: ${NGROK_SERVICE}
+
+        volumes:
+            # config
+            - ${DEVBOX_PATH}/config/${NGROK_SERVICE_NAME}:/root/.ngrok2
+
+        networks:
+            app_net:
+                ipv4_address: ${IP_NGROK_SERVICE}
+
 ################################################################################
 # NETWORK
 ################################################################################

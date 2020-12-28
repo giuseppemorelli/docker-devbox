@@ -1,0 +1,8 @@
+# see https://ngrok.com/docs#config-location for more config
+authtoken: <>
+web_addr: 172.16.250.18:4040
+tunnels:
+    webserver:
+        proto: http
+        # change with container ip you need
+        addr: 172.16.250.10:80
