@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker-compose run -u node nodejs "$@"
+docker-compose run --rm -u node nodejs "$@"
