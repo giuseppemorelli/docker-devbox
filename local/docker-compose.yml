@@ -204,7 +204,7 @@ services:
     # ------------------------------------------------------------
     # elasticsearch hq (monitoring)
     # ------------------------------------------------------------
-#    elasticsearch-sq:
+#    elasticsearch-hq:
 #        container_name: ${COMPOSE_PROJECT_NAME}_${ELASTICSEARCH_HQ_SERVICE_NAME}
 #        image: ${ELASTICSEARCH_HQ_SERVICE}
 #
