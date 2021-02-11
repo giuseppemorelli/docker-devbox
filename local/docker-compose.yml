@@ -27,6 +27,8 @@ services:
 #            APACHE_USER_UID: ${NEW_UID}
 #            APACHE_USER_GID: ${NEW_GID}
 #
+#            PHP_VERSION: ${PHP_VERSION}
+#
 #            POSTFIX_myhostname: ${PROJECT_HOSTNAME}
 #            POSTFIX_mydestination: ${PROJECT_HOSTNAME}
 #            POSTFIX_relayhost: ${IP_MAILHOG_SERVICE}:1025
