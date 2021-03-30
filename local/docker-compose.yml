@@ -44,6 +44,8 @@ services:
 #            WEBSERVER_LOG_DIR: /var/www/html/docker/local/tmp/logs
 #            PHP_LOG_DIR: /var/www/html/docker/local/tmp/logs
 #
+#            COMPOSER_PROCESS_TIMEOUT: 0
+#
 #        volumes:
 #            # ---- Format: ----
 #            # HOST-DIRECTORY : DOCKER-DIRECTORY
