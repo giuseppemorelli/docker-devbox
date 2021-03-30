@@ -116,7 +116,7 @@ services:
 #
 #        environment:
 #            MYSQL_ROOT_PASSWORD: "docker"
-#            # for mysql 8 comment user and password user, need to create via script
+#            # for mysql 8 comment user and password user, need to create via script only for legacy project
 #            MYSQL_USER: "local"
 #            MYSQL_PASSWORD: "local"
 #
