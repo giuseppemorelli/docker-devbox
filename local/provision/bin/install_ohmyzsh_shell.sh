@@ -7,5 +7,5 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
-cp /var/www/html/docker/local/config/zsh/.zshrc ~/.zshrc
-cp /var/www/html/docker/local/config/zsh/.p10k.zsh ~/.p10k.zsh
+cp /var/www/html/docker/config/zsh/.zshrc ~/.zshrc
+cp /var/www/html/docker/config/zsh/.p10k.zsh ~/.p10k.zsh
