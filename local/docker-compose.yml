@@ -28,6 +28,7 @@ services:
 #            APACHE_USER_GID: ${NEW_GID}
 #
 #            PHP_VERSION: ${PHP_VERSION}
+#            ENVIRONMENT: ${ENVIRONMENT}
 #
 #            POSTFIX_myhostname: ${PROJECT_HOSTNAME}
 #            POSTFIX_mydestination: ${PROJECT_HOSTNAME}
@@ -41,8 +42,8 @@ services:
 #            XDEBUG_SESSION: "${XDEBUG_SESSION}"
 #            XDEBUG_MODE: "${XDEBUG_MODE}"
 #
-#            WEBSERVER_LOG_DIR: /var/www/html/docker/local/tmp/logs
-#            PHP_LOG_DIR: /var/www/html/docker/local/tmp/logs
+#            WEBSERVER_LOG_DIR: /var/www/html/docker/tmp/logs
+#            PHP_LOG_DIR: /var/www/html/docker/tmp/logs
 #
 #            COMPOSER_PROCESS_TIMEOUT: 0
 #
@@ -52,7 +53,7 @@ services:
 #
 #            # mount web folder
 #            - ${HOST_PATH_WEB_WWW}:/var/www/html/project
-#            - ${DEVBOX_PATH}/../:/var/www/html/docker
+#            - ${DEVBOX_PATH}/:/var/www/html/docker
 #
 #            # Website config
 #            - ${DEVBOX_PATH}/config/${WEB_SERVER_NAME}/sites-enabled/:/etc/apache2/sites-enabled/
