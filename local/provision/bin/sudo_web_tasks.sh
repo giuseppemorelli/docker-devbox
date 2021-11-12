@@ -8,4 +8,4 @@ cp /var/www/html/docker/config/php/"$PHP_VERSION"/mods-available/devbox.ini /etc
 cp /var/www/html/docker/config/php/"$PHP_VERSION"/mods-available/devbox.ini /etc/php/"$PHP_VERSION"/cli/conf.d/devbox.ini
 
 # set permission to user on temp folder
-chown "$APACHE_USER_UID":"$APACHE_USER_GID" /var/www/html/docker/local/tmp -R
+chown "$APACHE_USER_UID":"$APACHE_USER_GID" /var/www/html/docker/tmp -R
