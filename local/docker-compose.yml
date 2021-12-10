@@ -232,6 +232,25 @@ services:
 #            app_net:
 #                ipv4_address: ${IP_NGROK_SERVICE}
 
+    # ------------------------------------------------------------
+    # nocodb
+    # ------------------------------------------------------------
+#    nocodb:
+#        depends_on:
+#            - mysql
+#        container_name: ${COMPOSE_PROJECT_NAME}_${NOCODB_SERVICE_NAME}
+#        image: ${NOCODB_SERVICE}
+#
+#        environment:
+#            PORT: ${NOCODB_PORT}
+#            # uncomment if you what to preconfigure a database to manage
+#            # NC_DB: ${NOCODB_DB}
+#            NC_BACKEND_URL: ${NOCODB_URL}
+#
+#        networks:
+#            app_net:
+#                ipv4_address: ${IP_NOCODB_SERVICE}
+
 ################################################################################
 # NETWORK
 ################################################################################
