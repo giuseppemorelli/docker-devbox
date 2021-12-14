@@ -14,6 +14,6 @@ make
 make install
 
 # replace xdebug 3 with xdebug 2 config
-cp /var/www/html/docker/config/php/"$PHP_VERSION"/mods-available/xdebug-custom.ini /etc/php/"$PHP_VERSION"/mods-available/xdebug-custom.ini
+cp /var/www/html/docker/config/php/mods-available/xdebug-custom.ini /etc/php/"$PHP_VERSION"/mods-available/xdebug-custom.ini
 rm /etc/php/"$PHP_VERSION"/apache2/conf.d/90-xdebug-3.ini
 rm /etc/php/"$PHP_VERSION"/cli/conf.d/90-xdebug-3.ini
