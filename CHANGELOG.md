@@ -1,5 +1,8 @@
 # Changelog
 
+### Changed
+- remove php hard-coded dependency on config folder
+
 ## 0.1.1
 
 ### Added
