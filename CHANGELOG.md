@@ -3,6 +3,9 @@
 ### Changed
 - remove php hard-coded dependency on config folder
 
+### Fixed
+- install ohmyzsh with sudo "power"
+
 ## 0.1.1
 
 ### Added
