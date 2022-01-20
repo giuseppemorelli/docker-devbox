@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+############################################
+# De-comment rows that you need to execute #
+############################################
+
 set -e
 
 ## FOR LAMP STACK
