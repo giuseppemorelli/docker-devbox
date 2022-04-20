@@ -208,6 +208,7 @@ services:
 
     # ------------------------------------------------------------
     # elasticsearch hq (monitoring)
+    # use port 5000
     # ------------------------------------------------------------
 #    elasticsearch-hq:
 #        container_name: ${COMPOSE_PROJECT_NAME}_${ELASTICSEARCH_HQ_SERVICE_NAME}
@@ -216,6 +217,9 @@ services:
 #        networks:
 #            app_net:
 #                ipv4_address: ${IP_ELASTICSEARCH_HQ_SERVICE}
+#
+#        extra_hosts:
+#            - ${ELASTICSEARCH_SERVICE_NAME}-server:${IP_ELASTICSEARCH_SERVICE}
 
     # ------------------------------------------------------------
     # ngrok
