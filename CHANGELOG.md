@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.2
+
 ### Changed
 - remove php hard-coded dependency on config folder
 - devbox.ini php settings
