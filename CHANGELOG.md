@@ -1,5 +1,11 @@
 # Changelog
 
+## [unreleased]
+
+### Changed
+- add redundant localhost on web container
+- move xdebug config from env variable to config file
+
 ## 0.1.2
 
 ### Changed

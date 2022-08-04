@@ -40,7 +40,6 @@ services:
 #            # v3
 #            XDEBUG_CONFIG: "client_host=${IP_LOCAL_COMPUTER} ${XDEBUG_CONFIG}"
 #            XDEBUG_SESSION: "${XDEBUG_SESSION}"
-#            XDEBUG_MODE: "${XDEBUG_MODE}"
 #
 #            WEBSERVER_LOG_DIR: /var/www/html/docker/tmp/logs
 #            PHP_LOG_DIR: /var/www/html/docker/tmp/logs
@@ -83,6 +82,7 @@ services:
 #            - ${REDIS_SERVER_NAME}-server:${IP_REDIS_SERVER}
 #            - ${MAILHOG_SERVICE_NAME}-server:${IP_MAILHOG_SERVICE}
 #            - ${ELASTICSEARCH_SERVICE_NAME}-server:${IP_ELASTICSEARCH_SERVICE}
+#            - ${PROJECT_HOSTNAME}:${IP_WEB_SERVER}
 
     # ------------------------------------------------------------
     # Node.js Server
