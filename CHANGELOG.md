@@ -1,6 +1,6 @@
 # Changelog
 
-## [unreleased]
+## 0.1.3
 
 ### Changed
 - add redundant localhost on web container
