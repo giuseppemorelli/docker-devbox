@@ -255,6 +255,42 @@ services:
 #            app_net:
 #                ipv4_address: ${IP_NOCODB_SERVICE}
 
+    # ------------------------------------------------------------
+    # Custom Service
+    # ------------------------------------------------------------
+#    custom:
+#        container_name: ${COMPOSE_PROJECT_NAME}_custom
+#        build:
+#            dockerfile: ./images/custom/Dockerfile
+#            context: .
+#
+#        volumes:
+#            # ---- Format: ----
+#            # HOST-DIRECTORY : DOCKER-DIRECTORY
+#
+#            # mount web folder
+#            - ${HOST_PATH_WEB_WWW}:/var/www/html/project
+#            - ${DEVBOX_PATH}/:/var/www/html/docker
+#
+#            # ssh config
+#            - ${DEVBOX_PATH}/config/ssh/:/var/www/.ssh/
+#
+#            # extra volume
+#            - ${HOST_PATH_WEB_EXTRA_STORAGE}:/mnt/
+#
+#            # home user folder
+#            - ~/:/home/user
+#            # - ~/:/home/<user>
+#
+#        # working_dir: /var/www/html/project
+#
+#        networks:
+#            app_net:
+#                ipv4_address: ${IP_CUSTOM_SERVICE}
+#
+#        extra_hosts:
+#            - ${PROJECT_HOSTNAME}:${IP_CUSTOM_SERVICE}
+
 ################################################################################
 # NETWORK
 ################################################################################
