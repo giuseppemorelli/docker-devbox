@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.4
+
+### Added
+- new service "custom" with Dockerfile to edit
+
 ## 0.1.3
 
 ### Changed
