@@ -310,7 +310,7 @@ services:
 #            POSTFIX_myhostname: ${PROJECT_HOSTNAME}
 #            POSTFIX_mydestination: ${PROJECT_HOSTNAME}
 #            POSTFIX_relayhost: ${IP_MAILHOG_SERVICE}:1025
-#            GOROOT: /usr/local/bin/go/bin/go
+#            GOROOT: /usr/local/bin/go
 #
 #        volumes:
 #            # ---- Format: ----
