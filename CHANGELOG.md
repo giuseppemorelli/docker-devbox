@@ -1,5 +1,8 @@
 # Changelog
 
+## WIP
+- add new service for golang
+
 ## 0.1.4
 
 ### Added

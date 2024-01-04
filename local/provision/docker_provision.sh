@@ -18,4 +18,7 @@ set -e
 ## FOR NODE.JS STACK
 # docker-compose run nodejs bash /home/node/docker/provision/bin/nodejs_tasks.sh
 
+## FOR GOLANG STACK
+# docker-compose exec -u $UID golang bash /home/gouser/docker/provision/bin/install_ohmyzsh_shell.sh
+
 docker-compose restart
