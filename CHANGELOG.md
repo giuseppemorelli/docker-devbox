@@ -2,6 +2,7 @@
 
 ## WIP
 - add new service for golang
+- add new service for mailpit
 
 ## 0.1.4
 

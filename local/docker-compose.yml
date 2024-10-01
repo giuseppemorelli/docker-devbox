@@ -81,6 +81,7 @@ services:
     #            - ${MYSQL_SERVER_NAME}-server:${IP_MYSQL_SERVER}
     #            - ${REDIS_SERVER_NAME}-server:${IP_REDIS_SERVER}
     #            - ${MAILHOG_SERVICE_NAME}-server:${IP_MAILHOG_SERVICE}
+    #            - ${MAILPIT_SERVICE_NAME}-server:${IP_MAILPIT_SERVICE}
     #            - ${ELASTICSEARCH_SERVICE_NAME}-server:${IP_ELASTICSEARCH_SERVICE}
     #            - ${PROJECT_HOSTNAME}:${IP_WEB_SERVER}
 
@@ -190,6 +191,17 @@ services:
     #        networks:
     #            app_net:
     #                ipv4_address: ${IP_MAILHOG_SERVICE}
+
+    # ------------------------------------------------------------
+    # mailpit
+    # ------------------------------------------------------------
+    #    mailhog:
+    #        container_name: ${COMPOSE_PROJECT_NAME}_${MAILPIT_SERVICE_NAME}
+    #        image: ${MAILPIT_SERVICE}
+    #
+    #        networks:
+    #            app_net:
+    #                ipv4_address: ${IP_MAILPIT_SERVICE}
 
     # ------------------------------------------------------------
     # elasticsearch
