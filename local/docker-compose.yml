@@ -18,7 +18,13 @@ services:
     # ------------------------------------------------------------
     #    web:
     #        container_name: ${COMPOSE_PROJECT_NAME}_${WEB_SERVER_NAME}
+    #        # use build or image, not both
     #        image: ${WEB_SERVER}
+    #        build:
+    #           dockerfile: ./images/custom/Dockerfile
+    #           context: .
+    #           args:
+    #            - PHP_VERSION=${PHP_VERSION}
     #
     #        environment:
     #            ##
@@ -195,9 +201,13 @@ services:
     # ------------------------------------------------------------
     # mailpit
     # ------------------------------------------------------------
-    #    mailhog:
+    #    mailpit:
     #        container_name: ${COMPOSE_PROJECT_NAME}_${MAILPIT_SERVICE_NAME}
     #        image: ${MAILPIT_SERVICE}
+    #
+    #        environment:
+    #            MP_SMTP_AUTH_ACCEPT_ANY: 1
+    #            MP_SMTP_AUTH_ALLOW_INSECURE: 1
     #
     #        networks:
     #            app_net:
