@@ -1,6 +1,8 @@
 # Changelog
 
-## WIP
+## 0.1.5
+
+### Added
 - add new service for golang
 - add new service for mailpit
 
