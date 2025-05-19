@@ -5,6 +5,7 @@
 ### Added
 - add new service for golang
 - add new service for mailpit
+- add new service for cloudflared (cloudflare tunnel like ngrok)
 
 ## 0.1.4
 

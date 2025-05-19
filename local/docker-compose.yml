@@ -14,302 +14,302 @@ services:
     # ------------------------------------------------------------
     # Web Server
     # ------------------------------------------------------------
-    #    web:
-    #        container_name: ${COMPOSE_PROJECT_NAME}_${WEB_SERVER_NAME}
-    #        # use build or image, not both
-    #        image: ${WEB_SERVER}
-    #        build:
-    #           dockerfile: ./images/custom/Dockerfile
-    #           context: .
-    #           args:
-    #            - PHP_VERSION=${PHP_VERSION}
-    #
-    #        environment:
-    #            ##
-    #            ## UserID and GroupID
-    #            ##
-    #            APACHE_USER_UID: ${NEW_UID}
-    #            APACHE_USER_GID: ${NEW_GID}
-    #
-    #            PHP_VERSION: ${PHP_VERSION}
-    #            ENVIRONMENT: ${ENVIRONMENT}
-    #
-    #            POSTFIX_myhostname: ${PROJECT_HOSTNAME}
-    #            POSTFIX_mydestination: ${PROJECT_HOSTNAME}
-    #            POSTFIX_relayhost: ${IP_MAILHOG_SERVICE}:1025
-    #
-    #            # v2
-    #            # XDEBUG_CONFIG: remote_host=${IP_LOCAL_COMPUTER}
-    #
-    #            # v3
-    #            XDEBUG_CONFIG: "client_host=${IP_LOCAL_COMPUTER} ${XDEBUG_CONFIG}"
-    #            XDEBUG_SESSION: "${XDEBUG_SESSION}"
-    #
-    #            WEBSERVER_LOG_DIR: /var/www/html/docker/tmp/logs
-    #            PHP_LOG_DIR: /var/www/html/docker/tmp/logs
-    #
-    #            COMPOSER_PROCESS_TIMEOUT: 0
-    #
-    #        volumes:
-    #            # ---- Format: ----
-    #            # HOST-DIRECTORY : DOCKER-DIRECTORY
-    #
-    #            # mount web folder
-    #            - ${HOST_PATH_WEB_WWW}:/var/www/html/project
-    #            - ${DEVBOX_PATH}/:/var/www/html/docker
-    #
-    #            # Website config
-    #            - ${DEVBOX_PATH}/config/${WEB_SERVER_NAME}/sites-enabled/:/etc/apache2/sites-enabled/
-    #
-    #            # composer config
-    #            - ${DEVBOX_PATH}/config/composer/:/var/www/.composer/
-    #            - ${HOST_PATH_COMPOSER_CACHE}:/var/www/.composer/cache/
-    #
-    #            # ssh config
-    #            - ${DEVBOX_PATH}/config/ssh/:/var/www/.ssh/
-    #
-    #            # extra volume
-    #            - ${HOST_PATH_WEB_EXTRA_STORAGE}:/mnt/
-    #
-    #            # home user folder
-    #            - ~/:/home/user
-    #            # - ~/:/home/<user>
-    #
-    #        working_dir: /var/www/html/project
-    #
-    #        networks:
-    #            app_net:
-    #                ipv4_address: ${IP_WEB_SERVER}
-    #
-    #        extra_hosts:
-    #            - ${MYSQL_SERVER_NAME}-server:${IP_MYSQL_SERVER}
-    #            - ${REDIS_SERVER_NAME}-server:${IP_REDIS_SERVER}
-    #            - ${MAILHOG_SERVICE_NAME}-server:${IP_MAILHOG_SERVICE}
-    #            - ${MAILPIT_SERVICE_NAME}-server:${IP_MAILPIT_SERVICE}
-    #            - ${ELASTICSEARCH_SERVICE_NAME}-server:${IP_ELASTICSEARCH_SERVICE}
-    #            - ${PROJECT_HOSTNAME}:${IP_WEB_SERVER}
+#    web:
+#        container_name: ${COMPOSE_PROJECT_NAME}_${WEB_SERVER_NAME}
+#        # use build or image, not both
+#        image: ${WEB_SERVER}
+#        build:
+#           dockerfile: ./images/custom/Dockerfile
+#           context: .
+#           args:
+#            - PHP_VERSION=${PHP_VERSION}
+#
+#        environment:
+#            ##
+#            ## UserID and GroupID
+#            ##
+#            APACHE_USER_UID: ${NEW_UID}
+#            APACHE_USER_GID: ${NEW_GID}
+#
+#            PHP_VERSION: ${PHP_VERSION}
+#            ENVIRONMENT: ${ENVIRONMENT}
+#
+#            POSTFIX_myhostname: ${PROJECT_HOSTNAME}
+#            POSTFIX_mydestination: ${PROJECT_HOSTNAME}
+#            POSTFIX_relayhost: ${IP_MAILHOG_SERVICE}:1025
+#
+#            # v2
+#            # XDEBUG_CONFIG: remote_host=${IP_LOCAL_COMPUTER}
+#
+#            # v3
+#            XDEBUG_CONFIG: "client_host=${IP_LOCAL_COMPUTER} ${XDEBUG_CONFIG}"
+#            XDEBUG_SESSION: "${XDEBUG_SESSION}"
+#
+#            WEBSERVER_LOG_DIR: /var/www/html/docker/tmp/logs
+#            PHP_LOG_DIR: /var/www/html/docker/tmp/logs
+#
+#            COMPOSER_PROCESS_TIMEOUT: 0
+#
+#        volumes:
+#            # ---- Format: ----
+#            # HOST-DIRECTORY : DOCKER-DIRECTORY
+#
+#            # mount web folder
+#            - ${HOST_PATH_WEB_WWW}:/var/www/html/project
+#            - ${DEVBOX_PATH}/:/var/www/html/docker
+#
+#            # Website config
+#            - ${DEVBOX_PATH}/config/${WEB_SERVER_NAME}/sites-enabled/:/etc/apache2/sites-enabled/
+#
+#            # composer config
+#            - ${DEVBOX_PATH}/config/composer/:/var/www/.composer/
+#            - ${HOST_PATH_COMPOSER_CACHE}:/var/www/.composer/cache/
+#
+#            # ssh config
+#            - ${DEVBOX_PATH}/config/ssh/:/var/www/.ssh/
+#
+#            # extra volume
+#            - ${HOST_PATH_WEB_EXTRA_STORAGE}:/mnt/
+#
+#            # home user folder
+#            - ~/:/home/user
+#            # - ~/:/home/<user>
+#
+#        working_dir: /var/www/html/project
+#
+#        networks:
+#            app_net:
+#                ipv4_address: ${IP_WEB_SERVER}
+#
+#        extra_hosts:
+#            - ${MYSQL_SERVER_NAME}-server:${IP_MYSQL_SERVER}
+#            - ${REDIS_SERVER_NAME}-server:${IP_REDIS_SERVER}
+#            - ${MAILHOG_SERVICE_NAME}-server:${IP_MAILHOG_SERVICE}
+#            - ${MAILPIT_SERVICE_NAME}-server:${IP_MAILPIT_SERVICE}
+#            - ${ELASTICSEARCH_SERVICE_NAME}-server:${IP_ELASTICSEARCH_SERVICE}
+#            - ${PROJECT_HOSTNAME}:${IP_WEB_SERVER}
 
     # ------------------------------------------------------------
     # Node.js Server
     # ------------------------------------------------------------
-    #    nodejs:
-    #        container_name: ${COMPOSE_PROJECT_NAME}_${NODEJS_SERVER_NAME}
-    #        image: ${NODEJS_SERVER}
-    #        user: ${NODEJS_USER}
-    #        command: ${NODEJS_COMMAND}
-    #
-    #        environment:
-    #            NODE_ENV: ${NODEJS_ENV}
-    #
-    #        volumes:
-    #            # ---- Format: ----
-    #            # HOST-DIRECTORY : DOCKER-DIRECTORY
-    #
-    #            # mount web folder
-    #            - ${HOST_PATH_WEB_WWW}:/home/node/project
-    #            - ${DEVBOX_PATH}/../:/home/node/docker
-    #
-    #        working_dir: /home/node/project
-    #
-    #        networks:
-    #            app_net:
-    #                ipv4_address: ${IP_NODE_SERVER}
+#    nodejs:
+#        container_name: ${COMPOSE_PROJECT_NAME}_${NODEJS_SERVER_NAME}
+#        image: ${NODEJS_SERVER}
+#        user: ${NODEJS_USER}
+#        command: ${NODEJS_COMMAND}
+#
+#        environment:
+#            NODE_ENV: ${NODEJS_ENV}
+#
+#        volumes:
+#            # ---- Format: ----
+#            # HOST-DIRECTORY : DOCKER-DIRECTORY
+#
+#            # mount web folder
+#            - ${HOST_PATH_WEB_WWW}:/home/node/project
+#            - ${DEVBOX_PATH}/../:/home/node/docker
+#
+#        working_dir: /home/node/project
+#
+#        networks:
+#            app_net:
+#                ipv4_address: ${IP_NODE_SERVER}
 
     # ------------------------------------------------------------
     # MySQL Database
     # ------------------------------------------------------------
-    #    mysql:
-    #        container_name: ${COMPOSE_PROJECT_NAME}_${MYSQL_SERVER_NAME}
-    #        image: ${MYSQL_SERVER}
-    #
-    #        environment:
-    #            MYSQL_ROOT_PASSWORD: "docker"
-    #            # for mysql 8 comment user and password user, need to create via script only for legacy project
-    #            MYSQL_USER: "local"
-    #            MYSQL_PASSWORD: "local"
-    #
-    #        volumes:
-    #            # ---- Format: ----
-    #            # HOST-DIRECTORY : DOCKER-DIRECTORY
-    #            - ${MYSQL_BACKUP_FOLDER}:/backup/
-    #
-    #            - ${DEVBOX_PATH}:/devbox
-    #            # extra mysql config (seems not working correctly with some versions)
-    #            # - ${DEVBOX_PATH}/config/mysql/conf.d/override_auth.conf:/etc/mysql/conf.d/override_auth.conf
-    #
-    #        networks:
-    #            app_net:
-    #                ipv4_address: ${IP_MYSQL_SERVER}
+#    mysql:
+#        container_name: ${COMPOSE_PROJECT_NAME}_${MYSQL_SERVER_NAME}
+#        image: ${MYSQL_SERVER}
+#
+#        environment:
+#            MYSQL_ROOT_PASSWORD: "docker"
+#            # for mysql 8 comment user and password user, need to create via script only for legacy project
+#            MYSQL_USER: "local"
+#            MYSQL_PASSWORD: "local"
+#
+#        volumes:
+#            # ---- Format: ----
+#            # HOST-DIRECTORY : DOCKER-DIRECTORY
+#            - ${MYSQL_BACKUP_FOLDER}:/backup/
+#
+#            - ${DEVBOX_PATH}:/devbox
+#            # extra mysql config (seems not working correctly with some versions)
+#            # - ${DEVBOX_PATH}/config/mysql/conf.d/override_auth.conf:/etc/mysql/conf.d/override_auth.conf
+#
+#        networks:
+#            app_net:
+#                ipv4_address: ${IP_MYSQL_SERVER}
 
     # ------------------------------------------------------------
     # Redis
     # ------------------------------------------------------------
-    #    redis:
-    #        container_name: ${COMPOSE_PROJECT_NAME}_${REDIS_SERVER_NAME}
-    #        image: ${REDIS_SERVER}
-    #
-    #        networks:
-    #            app_net:
-    #                ipv4_address: ${IP_REDIS_SERVER}
+#    redis:
+#        container_name: ${COMPOSE_PROJECT_NAME}_${REDIS_SERVER_NAME}
+#        image: ${REDIS_SERVER}
+#
+#        networks:
+#            app_net:
+#                ipv4_address: ${IP_REDIS_SERVER}
 
     # ------------------------------------------------------------
     # Redis Commander
     # ------------------------------------------------------------
-    #    redis-commander:
-    #        container_name: ${COMPOSE_PROJECT_NAME}_${REDIS_COMMANDER_SERVER_NAME}
-    #        image: ${REDIS_COMMANDER_SERVER}
-    #
-    #        environment:
-    #            REDIS_HOSTS: ${REDIS_COMMANDER_HOSTS}
-    #
-    #        networks:
-    #            app_net:
-    #                ipv4_address: ${IP_REDISCOMMANDER_SERVER}
-    #
-    #        extra_hosts:
-    #            - ${REDIS_SERVER_NAME}-server:${IP_REDIS_SERVER}
+#    redis-commander:
+#        container_name: ${COMPOSE_PROJECT_NAME}_${REDIS_COMMANDER_SERVER_NAME}
+#        image: ${REDIS_COMMANDER_SERVER}
+#
+#        environment:
+#            REDIS_HOSTS: ${REDIS_COMMANDER_HOSTS}
+#
+#        networks:
+#            app_net:
+#                ipv4_address: ${IP_REDISCOMMANDER_SERVER}
+#
+#        extra_hosts:
+#            - ${REDIS_SERVER_NAME}-server:${IP_REDIS_SERVER}
 
     # ------------------------------------------------------------
     # phpmyadmin
     # ------------------------------------------------------------
-    #    phpmyadmin:
-    #        container_name: ${COMPOSE_PROJECT_NAME}_${PHPMYADMIN_SERVICE_NAME}
-    #        image: ${PHPMYADMIN_SERVICE}
-    #
-    #        environment:
-    #            PMA_HOST: ${IP_MYSQL_SERVER}
-    #            PMA_USER: "root"
-    #            PMA_PASSWORD: "docker"
-    #
-    #        networks:
-    #            app_net:
-    #                ipv4_address: ${IP_PHPMYADMIN_SERVICE}
+#    phpmyadmin:
+#        container_name: ${COMPOSE_PROJECT_NAME}_${PHPMYADMIN_SERVICE_NAME}
+#        image: ${PHPMYADMIN_SERVICE}
+#
+#        environment:
+#            PMA_HOST: ${IP_MYSQL_SERVER}
+#            PMA_USER: "root"
+#            PMA_PASSWORD: "docker"
+#
+#        networks:
+#            app_net:
+#                ipv4_address: ${IP_PHPMYADMIN_SERVICE}
 
     # ------------------------------------------------------------
     # mailhog
     # ------------------------------------------------------------
-    #    mailhog:
-    #        container_name: ${COMPOSE_PROJECT_NAME}_${MAILHOG_SERVICE_NAME}
-    #        image: ${MAILHOG_SERVICE}
-    #
-    #        networks:
-    #            app_net:
-    #                ipv4_address: ${IP_MAILHOG_SERVICE}
+#    mailhog:
+#        container_name: ${COMPOSE_PROJECT_NAME}_${MAILHOG_SERVICE_NAME}
+#        image: ${MAILHOG_SERVICE}
+#
+#        networks:
+#            app_net:
+#                ipv4_address: ${IP_MAILHOG_SERVICE}
 
     # ------------------------------------------------------------
     # mailpit
     # ------------------------------------------------------------
-    #    mailpit:
-    #        container_name: ${COMPOSE_PROJECT_NAME}_${MAILPIT_SERVICE_NAME}
-    #        image: ${MAILPIT_SERVICE}
-    #
-    #        environment:
-    #            MP_SMTP_AUTH_ACCEPT_ANY: 1
-    #            MP_SMTP_AUTH_ALLOW_INSECURE: 1
-    #
-    #        networks:
-    #            app_net:
-    #                ipv4_address: ${IP_MAILPIT_SERVICE}
+#    mailpit:
+#        container_name: ${COMPOSE_PROJECT_NAME}_${MAILPIT_SERVICE_NAME}
+#        image: ${MAILPIT_SERVICE}
+#
+#        environment:
+#            MP_SMTP_AUTH_ACCEPT_ANY: 1
+#            MP_SMTP_AUTH_ALLOW_INSECURE: 1
+#
+#        networks:
+#            app_net:
+#                ipv4_address: ${IP_MAILPIT_SERVICE}
 
     # ------------------------------------------------------------
     # elasticsearch
     # ------------------------------------------------------------
-    #    elasticsearch:
-    #        container_name: ${COMPOSE_PROJECT_NAME}_${ELASTICSEARCH_SERVICE_NAME}
-    #        image: ${ELASTICSEARCH_SERVICE}
-    #
-    #        environment:
-    #            ES_JAVA_OPTS: '-Xms512m -Xmx512m'
-    #            discovery.type: 'single-node'
-    #
-    #        networks:
-    #            app_net:
-    #                ipv4_address: ${IP_ELASTICSEARCH_SERVICE}
+#    elasticsearch:
+#        container_name: ${COMPOSE_PROJECT_NAME}_${ELASTICSEARCH_SERVICE_NAME}
+#        image: ${ELASTICSEARCH_SERVICE}
+#
+#        environment:
+#            ES_JAVA_OPTS: '-Xms512m -Xmx512m'
+#            discovery.type: 'single-node'
+#
+#        networks:
+#            app_net:
+#                ipv4_address: ${IP_ELASTICSEARCH_SERVICE}
 
     # ------------------------------------------------------------
     # elasticsearch hq (monitoring)
     # use port 5000
     # ------------------------------------------------------------
-    #    elasticsearch-hq:
-    #        container_name: ${COMPOSE_PROJECT_NAME}_${ELASTICSEARCH_HQ_SERVICE_NAME}
-    #        image: ${ELASTICSEARCH_HQ_SERVICE}
-    #
-    #        networks:
-    #            app_net:
-    #                ipv4_address: ${IP_ELASTICSEARCH_HQ_SERVICE}
-    #
-    #        extra_hosts:
-    #            - ${ELASTICSEARCH_SERVICE_NAME}-server:${IP_ELASTICSEARCH_SERVICE}
+#    elasticsearch-hq:
+#        container_name: ${COMPOSE_PROJECT_NAME}_${ELASTICSEARCH_HQ_SERVICE_NAME}
+#        image: ${ELASTICSEARCH_HQ_SERVICE}
+#
+#        networks:
+#            app_net:
+#                ipv4_address: ${IP_ELASTICSEARCH_HQ_SERVICE}
+#
+#        extra_hosts:
+#            - ${ELASTICSEARCH_SERVICE_NAME}-server:${IP_ELASTICSEARCH_SERVICE}
 
     # ------------------------------------------------------------
     # ngrok
     # ------------------------------------------------------------
-    #    ngrok-service:
-    #        container_name: ${COMPOSE_PROJECT_NAME}_${NGROK_SERVICE_NAME}
-    #        image: ${NGROK_SERVICE}
-    #
-    #        volumes:
-    #            # config
-    #            - ${DEVBOX_PATH}/config/${NGROK_SERVICE_NAME}:/root/.ngrok2
-    #
-    #        networks:
-    #            app_net:
-    #                ipv4_address: ${IP_NGROK_SERVICE}
+#    ngrok-service:
+#        container_name: ${COMPOSE_PROJECT_NAME}_${NGROK_SERVICE_NAME}
+#        image: ${NGROK_SERVICE}
+#
+#        volumes:
+#            # config
+#            - ${DEVBOX_PATH}/config/${NGROK_SERVICE_NAME}:/root/.ngrok2
+#
+#        networks:
+#            app_net:
+#                ipv4_address: ${IP_NGROK_SERVICE}
 
     # ------------------------------------------------------------
     # nocodb
     # ------------------------------------------------------------
-    #    nocodb:
-    #        depends_on:
-    #            - mysql
-    #        container_name: ${COMPOSE_PROJECT_NAME}_${NOCODB_SERVICE_NAME}
-    #        image: ${NOCODB_SERVICE}
-    #
-    #        environment:
-    #            PORT: ${NOCODB_PORT}
-    #            # uncomment if you what to preconfigure a database to manage
-    #            # NC_DB: ${NOCODB_DB}
-    #            NC_BACKEND_URL: ${NOCODB_URL}
-    #
-    #        networks:
-    #            app_net:
-    #                ipv4_address: ${IP_NOCODB_SERVICE}
+#    nocodb:
+#        depends_on:
+#            - mysql
+#        container_name: ${COMPOSE_PROJECT_NAME}_${NOCODB_SERVICE_NAME}
+#        image: ${NOCODB_SERVICE}
+#
+#        environment:
+#            PORT: ${NOCODB_PORT}
+#            # uncomment if you what to preconfigure a database to manage
+#            # NC_DB: ${NOCODB_DB}
+#            NC_BACKEND_URL: ${NOCODB_URL}
+#
+#        networks:
+#            app_net:
+#                ipv4_address: ${IP_NOCODB_SERVICE}
 
     # ------------------------------------------------------------
     # Custom Service
     # ------------------------------------------------------------
-    #    custom:
-    #        container_name: ${COMPOSE_PROJECT_NAME}_custom
-    #        build:
-    #            dockerfile: ./images/custom/Dockerfile
-    #            context: .
-    #
-    #        volumes:
-    #            # ---- Format: ----
-    #            # HOST-DIRECTORY : DOCKER-DIRECTORY
-    #
-    #            # mount web folder
-    #            - ${HOST_PATH_WEB_WWW}:/var/www/html/project
-    #            - ${DEVBOX_PATH}/:/var/www/html/docker
-    #
-    #            # ssh config
-    #            - ${DEVBOX_PATH}/config/ssh/:/var/www/.ssh/
-    #
-    #            # extra volume
-    #            - ${HOST_PATH_WEB_EXTRA_STORAGE}:/mnt/
-    #
-    #            # home user folder
-    #            - ~/:/home/user
-    #            # - ~/:/home/<user>
-    #
-    #        # working_dir: /var/www/html/project
-    #
-    #        networks:
-    #            app_net:
-    #                ipv4_address: ${IP_CUSTOM_SERVICE}
-    #
-    #        extra_hosts:
-    #            - ${PROJECT_HOSTNAME}:${IP_CUSTOM_SERVICE}
+#    custom:
+#        container_name: ${COMPOSE_PROJECT_NAME}_custom
+#        build:
+#            dockerfile: ./images/custom/Dockerfile
+#            context: .
+#
+#        volumes:
+#            # ---- Format: ----
+#            # HOST-DIRECTORY : DOCKER-DIRECTORY
+#
+#            # mount web folder
+#            - ${HOST_PATH_WEB_WWW}:/var/www/html/project
+#            - ${DEVBOX_PATH}/:/var/www/html/docker
+#
+#            # ssh config
+#            - ${DEVBOX_PATH}/config/ssh/:/var/www/.ssh/
+#
+#            # extra volume
+#            - ${HOST_PATH_WEB_EXTRA_STORAGE}:/mnt/
+#
+#            # home user folder
+#            - ~/:/home/user
+#            # - ~/:/home/<user>
+#
+#        # working_dir: /var/www/html/project
+#
+#        networks:
+#            app_net:
+#                ipv4_address: ${IP_CUSTOM_SERVICE}
+#
+#        extra_hosts:
+#            - ${PROJECT_HOSTNAME}:${IP_CUSTOM_SERVICE}
 
     # ------------------------------------------------------------
     # Golang Service
@@ -363,6 +363,23 @@ services:
 #            - ${MAILHOG_SERVICE_NAME}-server:${IP_MAILHOG_SERVICE}
 #            - ${ELASTICSEARCH_SERVICE_NAME}-server:${IP_ELASTICSEARCH_SERVICE}
 #            - ${PROJECT_HOSTNAME}:${IP_GOLANG}
+
+    # ------------------------------------------------------------
+    # Cloudflared
+    # ------------------------------------------------------------
+#    cloudflared:
+#        container_name: ${COMPOSE_PROJECT_NAME}_${CLOUDFLARED_SERVICE_NAME}
+#        image: ${CLOUDFLARED_SERVICE}
+#
+#        environment:
+#            PORT: ${NOCODB_PORT}
+#            # uncomment if you what to preconfigure a database to manage
+#            # NC_DB: ${NOCODB_DB}
+#            NC_BACKEND_URL: ${NOCODB_URL}
+#
+#        networks:
+#            app_net:
+#                ipv4_address: ${IP_CLOUDFLARED_SERVICE}
 
 ################################################################################
 # NETWORK
