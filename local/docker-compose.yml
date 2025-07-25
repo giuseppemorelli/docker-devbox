@@ -371,12 +371,6 @@ services:
 #        container_name: ${COMPOSE_PROJECT_NAME}_${CLOUDFLARED_SERVICE_NAME}
 #        image: ${CLOUDFLARED_SERVICE}
 #
-#        environment:
-#            PORT: ${NOCODB_PORT}
-#            # uncomment if you what to preconfigure a database to manage
-#            # NC_DB: ${NOCODB_DB}
-#            NC_BACKEND_URL: ${NOCODB_URL}
-#
 #        networks:
 #            app_net:
 #                ipv4_address: ${IP_CLOUDFLARED_SERVICE}
